@@ -54,6 +54,9 @@ function deleteEntry(entry) {
 }
 
 function addItem(item) {
+   if (item==="") {
+      return 0;
+   }
    uniqueId++;
 
    var newli = $(".todoList").append("<li id='"+uniqueId+"'>"+item+"<span class='deleteButton' >X</span></li>");
