@@ -18,43 +18,37 @@ function hideDeleteButton() {
    $(this).find(".deleteButton").hide();
 }
 
-function setColors() {
-
+function setColors(ulElement) {
+   var list = ulElement.children("li");
+   let cc =0;
+   for (let i=0; i<list.length; i++) {
+      // console.log(list.get(0));
+      //let clr = $(list[i]).css("color").split(",")[1];
+      // console.log("clr =",clr);
+      cc +=20;
+      cc = (cc>220) ? 220 : cc;
+      var newcolor = "rgb("+cc+","+cc+","+cc+")"
+      $(list[i]).css("color",newcolor);
+   }
 }
 
 function deleteEntry(entry) {
    var el = $(entry)
    totalItems--;
-
-   var list = el.nextAll("li");
-   for (let i=0; i<list.length; i++) {
-      // console.log(list.get(0));
-      let clr = $(list[i]).css("color").split(",")[1];
-      // console.log("clr =",clr);
-      var cc = clr-10;
-      if (cc<0) {
-         cc=0;
-      }
-      var newcolor = "rgb("+cc+","+cc+","+cc+")"
-      $(list[i]).css("color",newcolor);
-   }
    el.remove();
+
+   setColors($(".todoList"));
 }
 
 function addItem(item) {
    uniqueId++;
 
-   //-- fade colors further on list
-   var cc = totalItems*10;
-   cc = (cc>220) ? 220 : cc;
-   var newcolor = "rgb("+cc+","+cc+","+cc+")"
    var newli = $(".todoList").append("<li>"+item+"<span class='deleteButton' id='"+uniqueId+"'>X</span></li>");
    // var newli = $(".todoList").append("<li>"+item+"<span class='deleteButton'>X</span></li>");
-   newli.children().last().css("color",newcolor);
 
    //-- hide deleteButtton and add click
    $(".deleteButton").last().hide();
-   var el = newli.children().last();
+   var el = newli.children("li").last();
    $(".deleteButton").last().click( function() {
       deleteEntry(el);
    });
@@ -62,6 +56,8 @@ function addItem(item) {
    newli.children().last().mouseover(showDeleteButton);
    newli.children().last().mouseout(hideDeleteButton);
    totalItems++;
+
+   setColors($(".todoList"));
 }
 
 $(".todoList").sortable();
