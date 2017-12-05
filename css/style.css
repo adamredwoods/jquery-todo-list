@@ -1,6 +1,7 @@
 
 body {
    font-family: 'Shadows Into Light Two', sans-serif;
+   background-image: url("../img/Paper-Pattern01.jpg");
 }
 
 ul {
@@ -12,7 +13,7 @@ h1 {
 }
 
 .entrybox {
-   background-color: #eee;
+   background-color: #edc;
    margin: 50px auto 0 auto;
    padding: 50px;
    width: 700px;
@@ -27,7 +28,7 @@ h1 {
 
 .listbox {
    margin: 10px auto 0 auto;
-   background-color: #eee;
+   background-color: #edc;
    width: 700px;
    padding: 50px;
 }
@@ -42,4 +43,9 @@ h1 {
    -ms-user-select: none; /* IE10+/Edge */
    user-select: none; /* Standard */
    cursor: pointer;
+   text-decoration: none;
+}
+
+.linethrough {
+   text-decoration: line-through;
 }

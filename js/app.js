@@ -38,17 +38,23 @@ function setColors(ulElement) {
 }
 
 function deleteEntry(entry) {
-   var el = $(entry)
-   totalItems--;
-   el.remove();
+   var el = $(entry);
 
-   setColors($(".todoList"));
+   if (el.hasClass("linethrough")) {
+      totalItems--;
+      el.remove();
+      setColors($(".todoList"));
+
+   } else {
+      el.addClass("linethrough");
+      el.children(".deleteButtom").css("text-decoration","none");
+   }
 }
 
 function addItem(item) {
    uniqueId++;
 
-   var newli = $(".todoList").append("<li>"+item+"<span class='deleteButton' id='"+uniqueId+"'>X</span></li>");
+   var newli = $(".todoList").append("<li id='"+uniqueId+"'>"+item+"<span class='deleteButton' >X</span></li>");
    // var newli = $(".todoList").append("<li>"+item+"<span class='deleteButton'>X</span></li>");
 
    //-- hide deleteButtton and add click
@@ -58,15 +64,24 @@ function addItem(item) {
       deleteEntry(el);
    });
 
-   newli.children().last().mouseover(showDeleteButton);
-   newli.children().last().mouseout(hideDeleteButton);
+   newli.children("li").last().mouseover(showDeleteButton);
+   newli.children("li").last().mouseout(hideDeleteButton);
    totalItems++;
 
    setColors($(".todoList"));
 }
 
+function getLocalStorage() {
+   var oldList = JSON.parse(localStorage.getItem("todo-list"));
+   if (oldList) {
+      oldList.forEach( function(item) {
+         additem(item);
+      });
+   }
+}
+
 $(".todoList").sortable({
-   change: function() {
+   update: function() {
       setColors($(".todoList"));
    }
 });
