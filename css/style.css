@@ -1,0 +1,41 @@
+
+body {
+   font-family: Arial, sans-serif;
+}
+
+ul {
+   font-size: 40px;
+}
+
+.entrybox {
+   background-color: #eee;
+   margin: 100px auto 0 auto;
+   padding: 50px;
+   width: 700px;
+   font-size: 20px;
+   color: 999;
+}
+
+.entrybox input{
+   font-size:24px;
+   width:700px;
+}
+
+.listbox {
+   margin: 10px auto 0 auto;
+   background-color: #eee;
+   width: 700px;
+   padding: 100px;
+}
+
+.deleteButton {
+   color: red;
+   margin: -50% 0 0 20px;
+   font-size: 20px;
+   line-height: 0px;
+   -webkit-user-select: none; /* Safari */
+   -moz-user-select: none; /* Firefox */
+   -ms-user-select: none; /* IE10+/Edge */
+   user-select: none; /* Standard */
+   cursor: pointer;
+}
