@@ -20,14 +20,19 @@ function hideDeleteButton() {
 
 function setColors(ulElement) {
    var list = ulElement.children("li");
-   let cc =0;
+   let cc =0, c1, c2, c3;
    for (let i=0; i<list.length; i++) {
       // console.log(list.get(0));
       //let clr = $(list[i]).css("color").split(",")[1];
       // console.log("clr =",clr);
       cc +=20;
-      cc = (cc>220) ? 220 : cc;
-      var newcolor = "rgb("+cc+","+cc+","+cc+")"
+      cc = (cc>220) ? 200 : cc;
+
+      c1 = (i%2==1) ? cc-20 : cc;
+      c2 = (i%2==0) ? cc-20 : cc;
+      c3 = (i%3==0) ? cc-20 : cc;
+
+      var newcolor = "rgb("+c1+","+c2+","+c3+")"
       $(list[i]).css("color",newcolor);
    }
 }
@@ -60,4 +65,8 @@ function addItem(item) {
    setColors($(".todoList"));
 }
 
-$(".todoList").sortable();
+$(".todoList").sortable({
+   change: function() {
+      setColors($(".todoList"));
+   }
+});
