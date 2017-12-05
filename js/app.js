@@ -35,6 +35,8 @@ function setColors(ulElement) {
       var newcolor = "rgb("+c1+","+c2+","+c3+")"
       $(list[i]).css("color",newcolor);
    }
+
+   setLocalStorage();
 }
 
 function deleteEntry(entry) {
@@ -71,11 +73,19 @@ function addItem(item) {
    setColors($(".todoList"));
 }
 
+function setLocalStorage() {
+   var arr = [];
+   $.each($(".todoList").children("li"), function(i, el) {
+      arr.push(el.textContent);
+   });
+   localStorage.setItem("todo-list", JSON.stringify(arr));
+}
+
 function getLocalStorage() {
    var oldList = JSON.parse(localStorage.getItem("todo-list"));
    if (oldList) {
       oldList.forEach( function(item) {
-         additem(item);
+         addItem(item.slice(0,item.length-1));
       });
    }
 }
@@ -85,3 +95,5 @@ $(".todoList").sortable({
       setColors($(".todoList"));
    }
 });
+
+getLocalStorage();
